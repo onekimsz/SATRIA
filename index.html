@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casual Connections</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #000000, #000000);
+            color: #333;
+            text-align: center;
+            overflow: hidden;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000000;
+            z-index: 999;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            flex-direction: column;
+        }
+
+        .dot-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dot {
+            width: 15px;
+            height: 15px;
+            margin: 0 5px;
+            background-color: #ff5c8d;
+            border-radius: 50%;
+            animation: pulse 1.2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.6;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .loading-message {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+                visibility: visible;
+            }
+            100% {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        .loading.hidden {
+            animation: fadeOut 1.5s forwards ease-in-out;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            padding: 20px;
+            position: relative;
+            opacity: 0;
+            transition: opacity 1s ease-out;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        /* Membuat satu gambar besar bulat dengan 4 Foto di Dalamnya */
+        .circle-gallery {
+            width: 330px;  /* Ukuran lingkaran diperbesar */
+            height: 330px;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            margin: auto;
+            aspect-ratio: 1;
+            border: 2px solid #fff; /* Optional border */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .circle-gallery .image-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            width: 100%;
+            height: 100%;
+            gap: 0; /* Menghilangkan jarak antar gambar */
+            transform: translateY(-15%); /* Geser gambar ke atas */
+        }
+
+        .circle-gallery img {
+            width: 100%;  /* Gambar mengambil seluruh lebar dan tinggi kotak */
+            height: 100%;  /* Gambar mengambil seluruh lebar dan tinggi kotak */
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Animasi saat gambar di hover */
+        .circle-gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button {
+            margin-top: 20px;  /* Menurunkan tombol sedikit agar pas di bawah lingkaran */
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 25px 60px;
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-button:active {
+            transform: scale(0.95);
+        }
+
+        .footer {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #f1f1f1;
+        }
+
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            .cta-button {
+                font-size: 1.8rem;
+                padding: 30px 70px;
+            }
+
+            .circle-gallery {
+                width: 380px;  /* Ukuran lingkaran lebih besar untuk layar lebih besar */
+                height: 380px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading" id="loading">
+        <div class="dot-container">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+        <div class="loading-message">Please be patient, we're getting things ready...</div>
+    </div>
+
+    <div class="container" id="mainContent">
+        <h1>Find The Woman You Want In The Bottom Button</h1>
+
+        <!-- Gambar Bulat Besar dengan 4 Foto di Dalamnya -->
+        <div class="circle-gallery">
+            <div class="image-container">
+                <img src="1.jpg" alt="Profile 1">
+                <img src="2.jpg" alt="Profile 2">
+                <img src="3.jpg" alt="Profile 3">
+                <img src="4.jpg" alt="Profile 4">
+            </div>
+        </div>
+
+        <!-- Tombol Continue yang lebih dekat dengan lingkaran -->
+        <button class="cta-button" id="ctaButton">Continue</button>
+        <div class="footer">Adult Only</div>
+    </div>
+
+    <script>
+        // Function to redirect to a random link when button is clicked
+        function redirectRandomLink() {
+            const randomLinks = [
+                'https://xtwphrh.mysweet-contactstimes.com/g2t2cdv?t=NARUTO&cid=FORTUNER',
+                'https://vnanxl.llovesgreat.com/?utm_source=da57dc555e50572d&&ban=inst&j1=1&s1=226805&s2=2083622&s3=NARUTO&click_id=INNOVA'
+            ];
+            const link = randomLinks[Math.floor(Math.random() * randomLinks.length)];
+            window.open(link, '_blank');  // Redirect to random link
+        }
+
+        // Assign redirect function to the button
+        document.getElementById('ctaButton').onclick = redirectRandomLink;
+
+        // Hide loading and show content after delay
+        setTimeout(() => {
+            document.getElementById('loading').classList.add('hidden');
+            setTimeout(() => {
+                document.getElementById('mainContent').style.opacity = 1;
+            }, 1000); // Fade-in duration for main content
+        }, 1500); // Animasi loading hanya 1.5 detik
+
+        // Disable right-click menu and text selection
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault(); // Disable right-click menu
+        });
+
+        document.addEventListener('selectstart', function (e) {
+            e.preventDefault(); // Disable text selection
+        });
+    </script>
+</body>
+</html>
